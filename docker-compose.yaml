@@ -5,13 +5,34 @@ services:
     container_name: catalogue
     depends_on:
     - mongodb
+  user:
+    build: ./user
+    image: anandkoppala/user:1.0.0
+    container_name: user
+    depends_on:
+    - redis  
+
   mongodb:
     build: ./mongodb # it moves to mongodb directory
     image: anandkoppala/mongodb:1.0.0 # docker build -t joindevops/mongodb:1.0.0
     container_name: mongodb
 
+  redis:
+    image: redis:7.0
+    container_name: redis  
+  
+
+  frontend:
+    build: ./frontend
+    image: anandkoppala/frontend:1.0.0
+    container_name: frontend
+    ports:
+    - "80:80"
+    depends_on:
+    - catalogue
+    - user
 networks:
   default:
     driver: bridge
     name: roboshop
-    external: false # if true, you need to create network manually    
+    external: false # if true, you need to create network manually
