@@ -39,7 +39,13 @@ services:
     build: ./mysql # it moves to mongodb directory
     image: anandkoppala/mysql:1.0.0 # docker build -t joindevops/mongodb:1.0.0
     container_name: mysql
-
+  
+  rabbitmq:
+    image: rabbitmq:3
+    environment: 
+      RABBITMQ_DEFAULT_USER: roboshop
+      RABBITMQ_DEFAULT_PASS: roboshop123
+    container_name: rabbitmq
       
   
 
@@ -55,7 +61,7 @@ services:
     - cart
     - shipping
 
-    
+
 networks:
   default:
     driver: bridge
