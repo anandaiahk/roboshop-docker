@@ -18,6 +18,14 @@ services:
     container_name: cart
     depends_on:
     - redis  
+
+  shipping:
+    build: ./shipping
+    image: anandkoppala/shipping:1.0.0
+    container_name: shipping
+    depends_on:
+    - mysql
+
   mongodb:
     build: ./mongodb # it moves to mongodb directory
     image: anandkoppala/mongodb:1.0.0 # docker build -t joindevops/mongodb:1.0.0
@@ -45,6 +53,9 @@ services:
     - catalogue
     - user
     - cart
+    - shipping
+
+    
 networks:
   default:
     driver: bridge
