@@ -26,6 +26,13 @@ services:
   redis:
     image: redis:7.0
     container_name: redis  
+
+  mysql:
+    build: ./mysql # it moves to mongodb directory
+    image: anandkoppala/mysql:1.0.0 # docker build -t joindevops/mongodb:1.0.0
+    container_name: mysql
+
+      
   
 
   frontend:
